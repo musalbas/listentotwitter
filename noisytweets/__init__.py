@@ -5,3 +5,4 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 import noisytweets.views
+import noisytweets.websocket
