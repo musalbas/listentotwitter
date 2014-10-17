@@ -1,3 +1,3 @@
-from noisytweets import app
+from noisytweets import app, socketio
 
-app.run(debug=True)
+socketio.run(app)
