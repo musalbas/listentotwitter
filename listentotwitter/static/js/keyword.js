@@ -12,13 +12,13 @@ function processSentimentQueue() {
             sum += sentimentQueue[i];
         }
 
-        averageSentiment = Math.round(sum / sentimentQueue.length)
+        averageSentiment = Math.round(sum / sentimentQueue.length);
 
         sentimentQueue = [];
     }
 
     if (newSound) {
-        var note = Math.round(((averageSentiment + 100) / 200) * 86) + 1
+        var note = Math.round(((averageSentiment + 100) / 200) * 86) + 1;
         playNote(note);
     }
 
