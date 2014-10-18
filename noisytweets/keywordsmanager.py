@@ -30,6 +30,7 @@ class KeywordsManager:
     def ping_keyword(self, keyword):
         if keyword in self._keywords_tracking:
             self._keywords_info[keyword]['last_ping'] = time.time()
+            return
 
         # TODO: respect max_keywords
 
