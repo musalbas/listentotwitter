@@ -2,6 +2,7 @@ import time
 
 from noisytweets.tweetstreamer import TweetStreamer
 
+
 class KeywordsManager:
 
     max_keywords = 100
