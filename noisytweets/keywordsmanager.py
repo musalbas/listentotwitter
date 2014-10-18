@@ -1,5 +1,7 @@
 import time
 
+from noisytweets import socketio
+from noisytweets.tweetanalyser import TweetAnalyser
 from noisytweets.tweetstreamer import TweetStreamer
 
 
@@ -12,7 +14,8 @@ class KeywordsManager:
         self._keywords_tracking = []
         self._keywords_info = {}
 
-        self._tweetstreamer = TweetStreamer()
+        self._tweetanalyser = TweetAnalyser(socketio)
+        self._tweetstreamer = TweetStreamer(self._tweetanalyser.incoming_tweet)
 
     def _get_dead_keywords():
         dead_keywords = []
