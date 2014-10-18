@@ -1,3 +1,6 @@
+from textblob import TextBlob
+
+
 class TweetAnalyser:
 
     def __init__(self, socketio):
@@ -8,7 +11,14 @@ class TweetAnalyser:
     def incoming_tweet(self, tweet):
         for keyword in self._keywords_tracking:
             if keyword in tweet:
-                self._socketio.emit('tweet', {'tweet': tweet}, room=keyword)
+                sentiment = int(TextBlob(tweet).sentiment.polarity * 100)
+
+                tweet_data = {
+                    'tweet': tweet,
+                    'sentiment': sentiment,
+                    }
+
+                self._socketio.emit('tweet', tweet_data, room=keyword)
 
     def update_keywords_tracking(self, keywords_tracking):
         self._keywords_tracking = keywords_tracking
