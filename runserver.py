@@ -1,4 +1,5 @@
-from noisytweets import app, socketio
+from noisytweets import app
+from noisytweets import socketio
 
 app.config['DEBUG'] = True
 
