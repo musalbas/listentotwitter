@@ -19,9 +19,10 @@ class StreamHandler(StreamListener):
 
     def on_data(self, data):
         datadict = json.loads(data)
-        tweet = datadict['text']
 
-        self._tweet_callback(tweet)
+        if 'text' in datadict:
+            tweet = datadict['text']
+            self._tweet_callback(tweet)
 
         return not self._stop_signal
 
