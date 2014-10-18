@@ -1,3 +1,5 @@
+from flask.ext.socketio import join_room
+
 from noisytweets import keywordsmanager
 from noisytweets import socketio
 
