@@ -16,7 +16,7 @@ class TweetAnalyser:
                 tweet_data = {
                     'tweet': tweet,
                     'sentiment': sentiment,
-                    }
+                }
 
                 self._socketio.emit('tweet', tweet_data, room=keyword)
 
