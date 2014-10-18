@@ -23,7 +23,7 @@ NoisyClient = {
         this.socket = io.connect('http://' + document.domain + ':' + location.port);
 
         this.ping();
-        window.setInterval(function () {
+        window.setInterval(function() {
             NoisyClient.ping();
         }, 10000);
 
