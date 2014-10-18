@@ -43,3 +43,4 @@ class KeywordsManager:
         self._keywords_info[keyword]['last_ping'] = time.time()
 
         self._tweetstreamer.update_keywords_tracking(self._keywords_tracking)
+        self._tweetanalyser.update_keywords_tracking(self._keywords_tracking)
