@@ -1,6 +1,9 @@
 from noisytweets import app
 from noisytweets import socketio
+from noisytweets.config import FLASK_DEBUG
+from noisytweets.config import FLASK_HOST
+from noisytweets.config import FLASK_PORT
 
-app.config['DEBUG'] = True
+app.config['DEBUG'] = FLASK_DEBUG   
 
-socketio.run(app)
+socketio.run(app, host=FLASK_HOST, port=FLASK_PORT)
