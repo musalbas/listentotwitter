@@ -1,5 +1,11 @@
-$(document).ready(function() {
-    keyword = window.location.pathname.split('/')[2];
+function processTweet(tweet) {
+    console.log(tweet);
+}
+
+function startNoisyClient(keyword) {
     NoisyClient.setup(keyword);
-    window.setInterval(function () { NoisyClient.ping(); }, 10000);
-});
+    
+    NoisyClient.addOnTweetFunction(function (tweet) {
+        processTweet(tweet);
+    });
+}
