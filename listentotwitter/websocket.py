@@ -1,7 +1,7 @@
 from flask.ext.socketio import join_room
 
-from noisytweets import keywordsmanager
-from noisytweets import socketio
+from listentotwitter import keywordsmanager
+from listentotwitter import socketio
 
 
 @socketio.on('ping')

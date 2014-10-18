@@ -1,6 +1,6 @@
 from flask import render_template
 
-from noisytweets import app
+from listentotwitter import app
 
 
 @app.route('/')

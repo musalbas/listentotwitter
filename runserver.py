@@ -1,8 +1,8 @@
-from noisytweets import app
-from noisytweets import socketio
-from noisytweets.config import FLASK_DEBUG
-from noisytweets.config import FLASK_HOST
-from noisytweets.config import FLASK_PORT
+from listentotwitter import app
+from listentotwitter import socketio
+from listentotwitter.config import FLASK_DEBUG
+from listentotwitter.config import FLASK_HOST
+from listentotwitter.config import FLASK_PORT
 
 app.config['DEBUG'] = FLASK_DEBUG   
 

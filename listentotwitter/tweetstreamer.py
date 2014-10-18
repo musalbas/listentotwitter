@@ -5,10 +5,10 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 
-from noisytweets.config import TWITTER_CONSUMER_KEY
-from noisytweets.config import TWITTER_CONSUMER_SECRET
-from noisytweets.config import TWITTER_ACCESS_TOKEN
-from noisytweets.config import TWITTER_ACCESS_TOKEN_SECRET
+from listentotwitter.config import TWITTER_CONSUMER_KEY
+from listentotwitter.config import TWITTER_CONSUMER_SECRET
+from listentotwitter.config import TWITTER_ACCESS_TOKEN
+from listentotwitter.config import TWITTER_ACCESS_TOKEN_SECRET
 
 class StreamHandler(StreamListener):
     

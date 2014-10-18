@@ -1,8 +1,8 @@
 import time
 
-from noisytweets import socketio
-from noisytweets.tweetanalyser import TweetAnalyser
-from noisytweets.tweetstreamer import TweetStreamer
+from listentotwitter import socketio
+from listentotwitter.tweetanalyser import TweetAnalyser
+from listentotwitter.tweetstreamer import TweetStreamer
 
 
 class KeywordsManager:
