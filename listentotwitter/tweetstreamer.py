@@ -26,6 +26,9 @@ class StreamHandler(StreamListener):
 
         return not self._stop_signal
 
+    def on_error(self, status):
+        print status
+
     def stop(self):
         self._stop_signal = True
 
