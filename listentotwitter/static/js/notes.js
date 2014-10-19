@@ -15,7 +15,6 @@ function playNote(note) {
     }
 
     if (!(note in notes)) {
-        console.log(note);
         notes[note] = soundManager.createSound({
             url: '/static/sound/' + note + '.mp3',
         });
