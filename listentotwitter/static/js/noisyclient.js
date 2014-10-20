@@ -17,10 +17,14 @@ NoisyClient = {
         }
     },
 
-    setup: function(keyword) {
+    setup: function(keyword, websocketUrl) {
         this.keyword = keyword;
 
-        this.socket = io.connect('http://' + document.domain + ':' + location.port);
+        if (typeof websocketUrl === 'undefined') {
+            websocketUrl = 'http://' + document.domain + ':' + location.port;
+        }
+
+        this.socket = io.connect(websocketUrl);
 
         this.ping();
         window.setInterval(function() {
