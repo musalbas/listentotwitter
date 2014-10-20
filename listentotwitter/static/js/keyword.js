@@ -1,5 +1,23 @@
 var sentimentQueue = [];
 
+function sentimentToCssClass(sentiment) {
+    var cssClass;
+
+    if (sentiment <= -60) {
+        cssClass = 'super-danger';
+    } else if (sentiment <= -20) {
+        cssClass = 'danger';
+    } else if (sentiment <= 20) {
+        cssClass = '';
+    } else if (sentiment <= 60) {
+        cssClass = 'success';
+    } else {
+        cssClass = 'super-success';
+    }
+
+    return cssClass;
+}
+
 function processSentimentQueue() {
     var averageSentiment = 0;
     var newSound = false;
@@ -32,7 +50,7 @@ function processTweet(tweet) {
     sentimentQueue.push(tweet['sentiment']);
 
     // Add tweet to the tweets table
-    $('<tr><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
+    $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
     $('#tweets-table').find('tbody').find('tr').slice(20, 21).remove();
 }
 

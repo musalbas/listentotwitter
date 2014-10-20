@@ -1,0 +1,29 @@
+.table > thead > tr > td.super-danger,
+.table > tbody > tr > td.super-danger,
+.table > tfoot > tr > td.super-danger,
+.table > thead > tr > th.super-danger,
+.table > tbody > tr > th.super-danger,
+.table > tfoot > tr > th.super-danger,
+.table > thead > tr.super-danger > td,
+.table > tbody > tr.super-danger > td,
+.table > tfoot > tr.super-danger > td,
+.table > thead > tr.super-danger > th,
+.table > tbody > tr.super-danger > th,
+.table > tfoot > tr.super-danger > th {
+    background-color: #ee7979;
+}
+
+.table > thead > tr > td.super-success,
+.table > tbody > tr > td.super-success,
+.table > tfoot > tr > td.super-success,
+.table > thead > tr > th.super-success,
+.table > tbody > tr > th.super-success,
+.table > tfoot > tr > th.super-success,
+.table > thead > tr.super-success > td,
+.table > tbody > tr.super-success > td,
+.table > tfoot > tr.super-success > td,
+.table > thead > tr.super-success > th,
+.table > tbody > tr.super-success > th,
+.table > tfoot > tr.super-success > th {
+    background-color: #8dda9a;
+}
