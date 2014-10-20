@@ -36,8 +36,8 @@ function processTweet(tweet) {
     $('#tweets-table').find('tbody').find('tr').slice(20, 21).remove();
 }
 
-function startNoisyClient(keyword) {
-    NoisyClient.setup(keyword);
+function startNoisyClient(keyword, websocketUrl) {
+    NoisyClient.setup(keyword, websocketUrl);
     
     NoisyClient.addOnTweetFunction(function(tweet) {
         processTweet(tweet);
