@@ -20,7 +20,7 @@ class StreamHandler(StreamListener):
     def on_data(self, data):
         datadict = json.loads(data)
 
-        if 'text' in datadict:
+        if 'in_reply_to_status_id' in datadict:
             tweet = datadict['text']
             self._tweet_callback(tweet)
 
