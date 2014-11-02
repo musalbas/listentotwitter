@@ -53,7 +53,7 @@ function processTweet(tweet) {
 
     // Add tweet to the tweets table
     $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
-    $('#tweets-table').find('tbody').find('tr').slice(7, 8).remove();
+    $('#tweets-table').find('tbody').find('tr').slice(10, 11).remove();
 }
 
 function sentimentToCssClass(sentiment) {

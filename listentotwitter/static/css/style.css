@@ -33,5 +33,10 @@
 }
 
 #emoji-stream {
-    height: 100px;
+    height: 80px;
+}
+
+#live-tweets {
+    height: 550px;
+    overflow: hidden;
 }
