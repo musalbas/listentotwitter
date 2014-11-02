@@ -27,3 +27,11 @@
 .table > tfoot > tr.super-success > th {
     background-color: #8dda9a;
 }
+
+#mood-graph {
+    height: 400px;
+}
+
+#emoji-stream {
+    height: 100px;
+}

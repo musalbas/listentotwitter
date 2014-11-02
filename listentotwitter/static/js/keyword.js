@@ -1,5 +1,30 @@
 var sentimentQueue = [];
 
+var graphPlot;
+var graphPoints = [];
+var graphTotalPoints = 300;
+
+for (var i = 0; i < graphTotalPoints; i++) {
+    graphPoints.push(0);
+}
+
+function pointsToSeries(points) {
+    var series = [];
+
+    for (var i = 0; i < points.length; i++) {
+        series.push([i, points[i]]);
+    }
+
+    return series;
+}
+
+function updateGraph(point) {
+    graphPoints = graphPoints.slice(1);
+    graphPoints.push(point);
+    graphPlot.setData([pointsToSeries(graphPoints)]);
+    graphPlot.draw();
+}
+
 function sentimentToCssClass(sentiment) {
     var cssClass;
 
@@ -40,6 +65,8 @@ function processSentimentQueue() {
         playNote(note);
     }
 
+    updateGraph(averageSentiment);
+
     setTimeout(function() {
         processSentimentQueue();
     }, 150);
@@ -51,7 +78,7 @@ function processTweet(tweet) {
 
     // Add tweet to the tweets table
     $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
-    $('#tweets-table').find('tbody').find('tr').slice(20, 21).remove();
+    $('#tweets-table').find('tbody').find('tr').slice(7, 8).remove();
 }
 
 function startNoisyClient(keyword, websocketUrl) {
@@ -59,6 +86,19 @@ function startNoisyClient(keyword, websocketUrl) {
     
     NoisyClient.addOnTweetFunction(function(tweet) {
         processTweet(tweet);
+    });
+
+    graphPlot = $.plot('#mood-graph', [pointsToSeries(graphPoints)], {
+        series: {
+            shadowSize: 0,
+        },
+        yaxis: {
+            min: -100,
+            max: 100,
+        },
+        xaxis: {
+            show: false,
+        },
     });
 
     processSentimentQueue();

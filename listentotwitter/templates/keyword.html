@@ -3,6 +3,7 @@
 {% block head %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/socket.io-0.9.16.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/soundmanager-2-nodebug.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.flot-0.8.3.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/noisyclient.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/keyword.js') }}"></script>
@@ -30,6 +31,13 @@ $(document).ready(function() {
                 <tbody>
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-8">
+            <h2>Mood graph</h2>
+            <div id="mood-graph"></div>
+
+            <h2>Emoji stream</h2>
+            <div id="emoji-stream"></div>
         </div>
     </div>
 </div>
