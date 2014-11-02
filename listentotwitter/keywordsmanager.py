@@ -17,7 +17,7 @@ class KeywordsManager:
         self._tweetanalyser = TweetAnalyser(socketio)
         self._tweetstreamer = TweetStreamer(self._tweetanalyser.incoming_tweet)
 
-    def _get_dead_keywords():
+    def _get_dead_keywords(self):
         dead_keywords = []
 
         for keyword in self._keywords_tracking:
@@ -26,7 +26,7 @@ class KeywordsManager:
 
         return dead_keywords
 
-    def _untrack_keyword(keyword):
+    def _untrack_keyword(self, keyword):
         if keyword in self._keywords_tracking:
             self._keywords_tracking.remove(keyword)
             del self._keywords_info[keyword]
