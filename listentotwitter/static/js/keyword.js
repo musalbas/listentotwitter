@@ -4,8 +4,28 @@ var graphPlot;
 var graphPoints = [];
 var graphTotalPoints = 300;
 
+var emojiCodepoints = []
+var maxEmojis = 10;
+
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);
+}
+
+function addEmoji(codepoint) {
+    emojiCodepoints.unshift(codepoint.toLowerCase());
+    console.log(emojiCodepoints);
+
+    if (emojiCodepoints.length > maxEmojis) {
+        emojiCodepoints = emojiCodepoints.slice(0, maxEmojis-1);
+    }
+
+    var html = '';
+
+    for (var i = 0; i < emojiCodepoints.length; i++) {
+        html = html + '<img src="/static/img/3rdparty/twitter_emojis/' + emojiCodepoints[i] + '.png">';
+    }
+
+    $('#emoji-stream').html(html);
 }
 
 function pointsToSeries(points) {
@@ -48,12 +68,14 @@ function processSentimentQueue() {
 }
 
 function processTweet(tweet) {
-    // Add tweet sentiment to the sentiment queue
     sentimentQueue.push(tweet['sentiment']);
 
-    // Add tweet to the tweets table
     $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
     $('#tweets-table').find('tbody').find('tr').slice(10, 11).remove();
+
+    for (var i = 0; i < tweet['emoji_codepoints'].length; i++) {
+        addEmoji(tweet['emoji_codepoints'][i]);
+    }
 }
 
 function sentimentToCssClass(sentiment) {
