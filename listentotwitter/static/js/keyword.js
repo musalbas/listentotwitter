@@ -18,31 +18,6 @@ function pointsToSeries(points) {
     return series;
 }
 
-function updateGraph(point) {
-    graphPoints = graphPoints.slice(1);
-    graphPoints.push(point);
-    graphPlot.setData([pointsToSeries(graphPoints)]);
-    graphPlot.draw();
-}
-
-function sentimentToCssClass(sentiment) {
-    var cssClass;
-
-    if (sentiment <= -60) {
-        cssClass = 'super-danger';
-    } else if (sentiment <= -20) {
-        cssClass = 'danger';
-    } else if (sentiment <= 20) {
-        cssClass = '';
-    } else if (sentiment <= 60) {
-        cssClass = 'success';
-    } else {
-        cssClass = 'super-success';
-    }
-
-    return cssClass;
-}
-
 function processSentimentQueue() {
     var averageSentiment = 0;
     var newSound = false;
@@ -81,6 +56,24 @@ function processTweet(tweet) {
     $('#tweets-table').find('tbody').find('tr').slice(7, 8).remove();
 }
 
+function sentimentToCssClass(sentiment) {
+    var cssClass;
+
+    if (sentiment <= -60) {
+        cssClass = 'super-danger';
+    } else if (sentiment <= -20) {
+        cssClass = 'danger';
+    } else if (sentiment <= 20) {
+        cssClass = '';
+    } else if (sentiment <= 60) {
+        cssClass = 'success';
+    } else {
+        cssClass = 'super-success';
+    }
+
+    return cssClass;
+}
+
 function startNoisyClient(keyword, websocketUrl) {
     NoisyClient.setup(keyword, websocketUrl);
     
@@ -102,4 +95,11 @@ function startNoisyClient(keyword, websocketUrl) {
     });
 
     processSentimentQueue();
+}
+
+function updateGraph(point) {
+    graphPoints = graphPoints.slice(1);
+    graphPoints.push(point);
+    graphPlot.setData([pointsToSeries(graphPoints)]);
+    graphPlot.draw();
 }
