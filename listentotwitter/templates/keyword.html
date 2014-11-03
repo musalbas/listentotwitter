@@ -1,6 +1,8 @@
 {% extends "page.html" %}
 
 {% block head %}
+<title>Listen to {{ keyword }} on Twitter</title>
+
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/socket.io-0.9.16.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/soundmanager-2-nodebug.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.flot-0.8.3.min.js') }}"></script>
@@ -19,6 +21,12 @@ $(document).ready(function() {
 {% block content %}
 <div class="container">
     <div class="row">
+        <div class="col-sm-8">
+            <h1>Listening to <strong>{{ keyword }}</strong> on Twitter</h1>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-4">
             <h2>Live tweets</h2>
             <div id="live-tweets">
@@ -34,6 +42,7 @@ $(document).ready(function() {
                 </table>
             </div>
         </div>
+
         <div class="col-sm-8">
             <h2>Mood graph</h2>
             <div id="mood-graph"></div>
