@@ -5,7 +5,7 @@ var graphPoints = [];
 var graphTotalPoints = 300;
 
 var emojiCodepoints = []
-var maxEmojis = 10;
+var maxEmojis = 12;
 
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);

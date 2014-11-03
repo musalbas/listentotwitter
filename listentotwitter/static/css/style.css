@@ -34,6 +34,8 @@
 
 #emoji-stream {
     height: 80px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #live-tweets {
