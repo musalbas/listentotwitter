@@ -7,8 +7,8 @@ var graphTotalPoints = 300;
 var emojiCodepoints = []
 var maxEmojis = 12;
 
-var instrument = 'piano';
-var interval = 150;
+var instrument = '';
+var interval = 0;
 
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);
@@ -28,16 +28,6 @@ function addEmoji(codepoint) {
     }
 
     $('#emoji-stream').html(html);
-}
-
-function changeInstrument(newInstrument) {
-    instrument = newInstrument;
-
-    if (instrument == 'piano') {
-        interval = 150;
-    } else if (instrument == 'jake') {
-        interval = 500;
-    }
 }
 
 function pointsToSeries(points) {
@@ -105,6 +95,19 @@ function sentimentToCssClass(sentiment) {
     }
 
     return cssClass;
+}
+
+function setInstrument(newInstrument) {
+    instrument = newInstrument;
+
+    switch (instrument) {
+        case 'piano':
+            interval = 150;
+            break;
+        case 'jake':
+            interval = 500;
+            break;
+    }
 }
 
 function startNoisyClient(keyword, websocketUrl) {

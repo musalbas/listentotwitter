@@ -39,11 +39,15 @@ function playSentiment(sentiment, instrument) {
 }
 
 function sentimentToNote(sentiment, instrument) {
-    if (instrument == 'piano') {
-        return Math.round(((sentiment + 100) / 200) * 86) + 1;
-    } else if (instrument == 'jake') {
-        return Math.round(((sentiment + 100) / 200) * 14) + 1;
+    var notesNum = 0;
+    switch (instrument) {
+        case 'piano':
+            notesNum = 87;
+            break;
+        case 'jake':
+            notesNum = 15;
+            break;
     }
 
-    return 0;
+    return Math.round(((sentiment + 100) / 200) * notesNum - 1) + 1;
 }
