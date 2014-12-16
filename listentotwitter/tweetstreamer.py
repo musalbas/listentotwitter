@@ -1,5 +1,4 @@
 import threading
-import time
 import json
 
 from tweepy.streaming import StreamListener
