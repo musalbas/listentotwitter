@@ -21,7 +21,7 @@ class KeywordsManager:
         dead_keywords = []
 
         for keyword in self._keywords_tracking:
-            if time.time() - self._keywords_info['last_ping'] > ping_timeout:
+            if time.time() - self._keywords_info[keyword]['last_ping'] > ping_timeout:
                 dead_keywords.append(keyword)
 
         return dead_keywords
