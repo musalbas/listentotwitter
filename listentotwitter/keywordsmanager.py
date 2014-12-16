@@ -5,6 +5,13 @@ from listentotwitter.tweetanalyser import TweetAnalyser
 from listentotwitter.tweetstreamer import TweetStreamer
 
 
+def keyword_test(keyword):
+    if len(keyword) >= 3 and len(keyword) <= 15:
+        return True
+    else:
+        return False
+
+
 class KeywordsManager:
 
     max_keywords = 100
