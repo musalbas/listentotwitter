@@ -57,7 +57,12 @@ class StreamThread(threading.Thread):
         self._stream = Stream(auth, self._streamhandler)
 
     def run(self):
-        self._stream.filter(track=self._keywords_tracking)
+        while True:
+            try:
+                self._stream.filter(track=self._keywords_tracking)
+                break
+            except Exception:
+                continue
 
     def stop(self):
         self._streamhandler.stop()
