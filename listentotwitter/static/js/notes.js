@@ -1,6 +1,6 @@
 var soundManagerReady = false;
 var soundManagerPreferFlash = false;
-var notes = {}
+var instruments = {}
 
 if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
     soundManagerPreferFlash = true;
@@ -16,16 +16,34 @@ soundManager.setup({
     },
 });
 
-function playNote(note) {
+function playNote(note, instrument) {
     if (!soundManagerReady) {
         return;
     }
 
-    if (!(note in notes)) {
-        notes[note] = soundManager.createSound({
-            url: '/static/sound/' + note + '.mp3',
+    if (!(instrument in instruments)) {
+        instruments[instrument] = {}
+    }
+
+    if (!(note in instruments[instrument])) {
+        instruments[instrument][note] = soundManager.createSound({
+            url: '/static/sound/' + instrument + '/' + note + '.mp3',
         });
     }
 
-    notes[note].play();
+    instruments[instrument][note].play();
+}
+
+function playSentiment(sentiment, instrument) {
+    playNote(sentimentToNote(sentiment, instrument), instrument)
+}
+
+function sentimentToNote(sentiment, instrument) {
+    if (instrument == 'piano') {
+        return Math.round(((sentiment + 100) / 200) * 86) + 1;
+    } else if (instrument == 'jake') {
+        return Math.round(((sentiment + 100) / 200) * 14) + 1;
+    }
+
+    return 0;
 }

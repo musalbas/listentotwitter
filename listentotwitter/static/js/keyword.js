@@ -7,13 +7,15 @@ var graphTotalPoints = 300;
 var emojiCodepoints = []
 var maxEmojis = 12;
 
+var instrument = 'piano';
+var interval = 150;
+
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);
 }
 
 function addEmoji(codepoint) {
     emojiCodepoints.unshift(codepoint.toLowerCase());
-    console.log(emojiCodepoints);
 
     if (emojiCodepoints.length > maxEmojis) {
         emojiCodepoints = emojiCodepoints.slice(0, maxEmojis-1);
@@ -26,6 +28,16 @@ function addEmoji(codepoint) {
     }
 
     $('#emoji-stream').html(html);
+}
+
+function changeInstrument(newInstrument) {
+    instrument = newInstrument;
+
+    if (instrument == 'piano') {
+        interval = 150;
+    } else if (instrument == 'jake') {
+        interval = 500;
+    }
 }
 
 function pointsToSeries(points) {
@@ -56,15 +68,14 @@ function processSentimentQueue() {
     }
 
     if (newSound) {
-        var note = Math.round(((averageSentiment + 100) / 200) * 86) + 1;
-        playNote(note);
+        playSentiment(averageSentiment, instrument);
     }
 
     updateGraph(averageSentiment);
 
     setTimeout(function() {
         processSentimentQueue();
-    }, 150);
+    }, interval);
 }
 
 function processTweet(tweet) {
