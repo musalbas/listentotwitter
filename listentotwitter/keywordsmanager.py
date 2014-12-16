@@ -21,10 +21,14 @@ class KeywordsManager:
         dead_keywords = []
 
         for keyword in self._keywords_tracking:
-            if time.time() - self._keywords_info[keyword]['last_ping'] > ping_timeout:
+            if time.time() - self._keywords_info[keyword]['last_ping'] > self.ping_timeout:
                 dead_keywords.append(keyword)
 
         return dead_keywords
+
+    def _purge_dead_keywords(self):
+        for keyword in self._get_dead_keywords():
+            self._untrack_keyword(keyword)
 
     def _untrack_keyword(self, keyword):
         if keyword in self._keywords_tracking:
@@ -36,7 +40,10 @@ class KeywordsManager:
             self._keywords_info[keyword]['last_ping'] = time.time()
             return
 
-        # TODO: respect max_keywords
+        self._purge_dead_keywords()
+
+        if len(self._keywords_tracking) >= self.max_keywords:
+            return # TODO display error message to user
 
         self._keywords_tracking.append(keyword)
         self._keywords_info[keyword] = {}
