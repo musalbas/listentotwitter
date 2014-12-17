@@ -1,3 +1,4 @@
+import time
 import threading
 import json
 
@@ -85,6 +86,8 @@ class StreamThread(threading.Thread):
 
 class TweetStreamer():
 
+    reconnect_interval = 10
+
     def __init__(self, tweet_callback):
         self._tweet_callback = tweet_callback
 
@@ -95,6 +98,7 @@ class TweetStreamer():
         self._new_streamthead = None
         self._keywords_tracking = None
         self._update_keywords_tracking_locked = False
+        self._last_connect = 0
 
     def _on_stream_first_response(self, response):
         if response is True:
@@ -118,5 +122,10 @@ class TweetStreamer():
 
         self._update_keywords_tracking_locked = True
 
+        connect_diff = time.time() - self._last_connect
+        if self.reconnect_interval > connect_diff:
+            time.sleep(connect_diff)
+
         self._new_streamthread = StreamThread(self._auth, self._keywords_tracking, self._tweet_callback, self._on_stream_first_response)
+        self._last_connect = time.time()
         self._new_streamthread.start()
