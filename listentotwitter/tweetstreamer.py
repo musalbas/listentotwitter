@@ -40,16 +40,15 @@ class StreamHandler(StreamListener):
             self._tweet_callback(tweet)
 
     def on_error(self, status):
+        log("Received Twitter API error: " + str(status))
         if self._first_response:
             self._first_response = False
             if self._first_response_callback is not None:
                 self._first_response_callback(status)
 
-        log("Received Twitter API error: " + str(status))
         return not self._stop_signal
 
     def stop(self):
-        log("Stopping Twitter stream")
         self._stop_signal = True
 
 
@@ -70,6 +69,7 @@ class StreamThread(threading.Thread):
         return list(self._keywords_tracking)
 
     def run(self):
+        log("Starting Twitter stream")
         while True:
             if self._stop_signal:
                 break
@@ -86,6 +86,7 @@ class StreamThread(threading.Thread):
                 continue
 
     def stop(self):
+        log("Stopping Twitter stream")
         self._stop_signal = True
         self._streamhandler.stop()
 
