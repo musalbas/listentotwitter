@@ -16,6 +16,7 @@ class KeywordsManager:
 
     max_keywords = 100
     ping_timeout = 30
+    compulsory_keywords = ('lol',)
 
     def __init__(self):
         self._keywords_tracking = []
@@ -24,11 +25,14 @@ class KeywordsManager:
         self._tweetanalyser = TweetAnalyser(socketio)
         self._tweetstreamer = TweetStreamer(self._tweetanalyser.incoming_tweet)
 
+        for keyword in self.compulsory_keywords:
+            self.ping_keyword(keyword)
+
     def _get_dead_keywords(self):
         dead_keywords = []
 
         for keyword in self._keywords_tracking:
-            if time.time() - self._keywords_info[keyword]['last_ping'] > self.ping_timeout:
+            if keyword not in self.compulsory_keywords and time.time() - self._keywords_info[keyword]['last_ping'] > self.ping_timeout:
                 dead_keywords.append(keyword)
 
         return dead_keywords
