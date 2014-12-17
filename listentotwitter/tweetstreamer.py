@@ -118,8 +118,8 @@ class TweetStreamer():
             self._new_streamthread = None
             self._update_keywords_tracking_locked = False
 
-            if self._streamthread.get_keywords_tracking != self._keywords_tracking:
-                self._update_keywords_tracking(self._keywords_tracking)
+            if self._streamthread.get_keywords_tracking() != self._keywords_tracking:
+                self._streamthread._update_keywords_tracking(self._keywords_tracking)
         else:
             self._new_streamthread.stop()
             self._new_streamthread = None
