@@ -72,20 +72,18 @@ class StreamThread(threading.Thread):
         log("Starting Twitter stream")
         while True:
             if self._stop_signal:
+                log("Twitter stream stopped")
                 break
 
             try:
                 log("Connecting to Twitter stream")
                 self._stream.filter(track=self._keywords_tracking)
-                break
             except Exception as e:
                 log("Connection to Twitter stream lost: " + str(e))
                 if self._streamhandler._first_response:
                     self._streamhandler._first_response = False
                     if self._first_response_callback is not None:
                         self._first_response_callback(False)
-
-                continue
 
     def stop(self):
         log("Stopping Twitter stream")
