@@ -10,6 +10,7 @@ from listentotwitter.config import TWITTER_CONSUMER_SECRET
 from listentotwitter.config import TWITTER_ACCESS_TOKEN
 from listentotwitter.config import TWITTER_ACCESS_TOKEN_SECRET
 
+
 class StreamHandler(StreamListener):
     
     def __init__(self, tweet_callback, first_response_callback = None):
