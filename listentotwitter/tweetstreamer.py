@@ -63,6 +63,9 @@ class StreamThread(threading.Thread):
 
         self._stop_signal = False
 
+    def get_keywords_tracking(self):
+        return list(self._keywords_tracking)
+
     def run(self):
         while True:
             if self._stop_signal:
@@ -108,6 +111,9 @@ class TweetStreamer():
             del self._new_streamthread
             self._new_streamthread = None
             self._update_keywords_tracking_locked = False
+
+            if self._streamthread.get_keywords_tracking != self._keywords_tracking:
+                self._update_keywords_tracking(self._keywords_tracking)
         else:
             self._new_streamthread.stop()
             self._new_streamthread = None
