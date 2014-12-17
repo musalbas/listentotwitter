@@ -57,15 +57,21 @@ class StreamThread(threading.Thread):
         self._streamhandler = StreamHandler(tweet_callback, first_response_callback)
         self._stream = Stream(auth, self._streamhandler)
 
+        self._stop_signal = False
+
     def run(self):
         while True:
             try:
                 self._stream.filter(track=self._keywords_tracking)
                 break
             except Exception:
-                continue
+                if self._stop_signal:
+                    break
+                else:
+                    continue
 
     def stop(self):
+        self._stop_signal = True
         self._streamhandler.stop()
 
 
