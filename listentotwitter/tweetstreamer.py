@@ -53,6 +53,7 @@ class StreamThread(threading.Thread):
         threading.Thread.__init__(self)
 
         self._keywords_tracking = keywords_tracking
+        self._first_response_callback = first_response_callback
 
         self._streamhandler = StreamHandler(tweet_callback, first_response_callback)
         self._stream = Stream(auth, self._streamhandler)
@@ -61,14 +62,19 @@ class StreamThread(threading.Thread):
 
     def run(self):
         while True:
+            if self._stop_signal:
+                break
+
             try:
                 self._stream.filter(track=self._keywords_tracking)
                 break
             except Exception:
-                if self._stop_signal:
-                    break
-                else:
-                    continue
+                if self._stream._first_response:
+                    self._stream._first_response = False
+                    if self._first_response_callback is not None:
+                        self._first_response_callback(False)
+
+                continue
 
     def stop(self):
         self._stop_signal = True
