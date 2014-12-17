@@ -49,6 +49,7 @@ class StreamHandler(StreamListener):
         return not self._stop_signal
 
     def stop(self):
+        log("Stopping Twitter stream")
         self._stop_signal = True
 
 
