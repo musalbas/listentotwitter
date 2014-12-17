@@ -10,6 +10,7 @@ from listentotwitter.config import TWITTER_CONSUMER_KEY
 from listentotwitter.config import TWITTER_CONSUMER_SECRET
 from listentotwitter.config import TWITTER_ACCESS_TOKEN
 from listentotwitter.config import TWITTER_ACCESS_TOKEN_SECRET
+from listentotwitter.debug import log
 
 
 class StreamHandler(StreamListener):
@@ -22,6 +23,7 @@ class StreamHandler(StreamListener):
         self._first_response = True
 
     def on_connect(self):
+        log("Twitter stream connected")
         if self._first_response:
             self._first_response = False
             if self._first_response_callback is not None:
@@ -43,7 +45,7 @@ class StreamHandler(StreamListener):
             if self._first_response_callback is not None:
                 self._first_response_callback(status)
 
-        print status # TODO remove this
+        log("Received Twitter API error: " + str(status))
         return not self._stop_signal
 
     def stop(self):
@@ -121,8 +123,10 @@ class TweetStreamer():
             self.update_keywords_tracking(self._keywords_tracking)
 
     def update_keywords_tracking(self, keywords_tracking):
+        log("Updating keywords tracking to: " + ", ".join(keywords_tracking))
         self._keywords_tracking = keywords_tracking
 
+        log("Update keywords tracking locked: " + str(self._update_keywords_tracking_locked))
         if self._update_keywords_tracking_locked:
             return
 
@@ -130,6 +134,7 @@ class TweetStreamer():
 
         connect_diff = time.time() - self._last_connect
         if self.reconnect_interval > connect_diff:
+            log("Sleeping for " + str(connect_diff) + " before updating keywords tracking")
             time.sleep(connect_diff)
 
         self._new_streamthread = StreamThread(self._auth, self._keywords_tracking, self._tweet_callback, self._on_stream_first_response)
