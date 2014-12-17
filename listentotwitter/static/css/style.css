@@ -42,3 +42,18 @@
     height: 550px;
     overflow: hidden;
 }
+
+#keyword-form {
+    display: inline;
+}
+
+#keyword-form #keyword-input {
+    width: 300px;
+}
+
+#keyword-form #keyword-input:focus {
+}
+
+#keyword-form input[type="submit"] {
+    display: none;
+}

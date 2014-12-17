@@ -10,6 +10,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/noisyclient.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/keyword.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/notes.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/keyword-box.js') }}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -23,7 +24,7 @@ $(document).ready(function() {
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1>Listening to <strong>{{ keyword }}</strong> on Twitter</h1>
+            <h1>Listening to <strong>{% include 'blocks/keyword-box.html' %}</strong> on Twitter</h1>
 
             <hr>
         </div>
