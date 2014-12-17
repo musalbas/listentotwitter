@@ -136,8 +136,9 @@ class TweetStreamer():
 
         connect_diff = time.time() - self._last_connect
         if self.reconnect_interval > connect_diff:
-            log("Sleeping for " + str(connect_diff) + " before updating keywords tracking")
-            time.sleep(connect_diff)
+            sleep_time = self.reconnect_interval - connect_diff
+            log("Sleeping for " + str(sleep_time) + " before updating keywords tracking")
+            time.sleep(sleep_time)
 
         self._new_streamthread = StreamThread(self._auth, self._keywords_tracking, self._tweet_callback, self._on_stream_first_response)
         self._last_connect = time.time()
