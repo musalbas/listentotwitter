@@ -75,8 +75,8 @@ class StreamThread(threading.Thread):
                 self._stream.filter(track=self._keywords_tracking)
                 break
             except Exception:
-                if self._stream._first_response:
-                    self._stream._first_response = False
+                if self._streamhandler._first_response:
+                    self._streamhandler._first_response = False
                     if self._first_response_callback is not None:
                         self._first_response_callback(False)
 
