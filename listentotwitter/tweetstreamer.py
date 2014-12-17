@@ -27,13 +27,14 @@ class StreamHandler(StreamListener):
                 self._first_response_callback(True)
 
     def on_data(self, data):
+        if self._stop_signal:
+            return False
+
         datadict = json.loads(data)
 
         if 'in_reply_to_status_id' in datadict:
             tweet = datadict['text']
             self._tweet_callback(tweet)
-
-        return not self._stop_signal
 
     def on_error(self, status):
         if self._first_response:
