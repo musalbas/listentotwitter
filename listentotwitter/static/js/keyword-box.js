@@ -10,12 +10,7 @@ $(document).ready(function() {
     });
 
     $('#keyword-form #keyword-input').focus(function() {
-        if (this.setSelectionRange) {
-            var len = $(this).val().length * 2;
-            this.setSelectionRange(len, len);
-        } else {
-            $(this).val($(this).val());
-        }
+        $(this).select();
     });
 
     $('#keyword-form #keyword-input').trigger('focus');
