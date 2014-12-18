@@ -15,4 +15,4 @@ def view_keyword(keyword):
     if keyword_test(keyword):
         return render_template('keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:
-        abort(404)
+        return render_template('bad-keyword.html', keyword=keyword)
