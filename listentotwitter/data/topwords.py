@@ -1,0 +1,1 @@
+topwords = ["t.co", "the", "i", "to", "a", "and", "is", "in", "it", "you", "of", "for", "on", "my", "that", "at", "with", "me", "do", "have", "just", "this", "be", "so", "are", "not", "was", "but", "out", "up", "what", "now", "new", "from", "your", "like", "good", "no", "get", "all", "about", "we", "if", "time", "as", "day", "will", "one", "how", "can", "some"]

@@ -1,12 +1,15 @@
 import time
 
 from listentotwitter import socketio
+from listentotwitter.data.topwords import topwords
 from listentotwitter.tweetanalyser import TweetAnalyser
 from listentotwitter.tweetstreamer import TweetStreamer
 
 
 def keyword_test(keyword):
-    if len(keyword) >= 3 and len(keyword) <= 15:
+    keyword = keyword.strip()
+
+    if len(keyword) >= 3 and len(keyword) <= 15 and keyword not in topwords:
         return True
     else:
         return False
