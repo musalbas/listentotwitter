@@ -1,4 +1,6 @@
-from flask import abort, render_template
+from flask import abort
+from flask import redirect
+from flask import render_template
 
 from listentotwitter import app
 from listentotwitter.config import WEBSOCKET_URL
@@ -12,7 +14,10 @@ def view_index():
 
 @app.route('/keyword/<keyword>')
 def view_keyword(keyword):
-    if keyword_test(keyword):
+    keyword_lower = keyword.lower()
+    if keyword_lower != keyword:
+        return redirect('/keyword/' + keyword_lower, code=302)
+    elif keyword_test(keyword):
         return render_template('keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:
         return render_template('bad-keyword.html', keyword=keyword)
