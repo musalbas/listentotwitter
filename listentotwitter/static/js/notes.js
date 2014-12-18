@@ -49,5 +49,5 @@ function sentimentToNote(sentiment, instrument) {
             break;
     }
 
-    return Math.round(((sentiment + 100) / 200) * notesNum - 1) + 1;
+    return Math.round(((sentiment + 100) / 200) * (notesNum - 1) - 1) + 2;
 }
