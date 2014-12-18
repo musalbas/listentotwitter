@@ -1,4 +1,9 @@
 function redirectKeyword(keyword) {
+    if (keyword.indexOf('/') >= 0) {
+        alert("Keywords shouldn't contain '/' mate.");
+        return;
+    }
+
     document.location.href = '/keyword/' + keyword;
 }
 
