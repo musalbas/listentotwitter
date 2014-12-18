@@ -22,7 +22,7 @@ class KeywordsManager:
 
     max_keywords = 100
     ping_timeout = 30
-    compulsory_keywords = ('lol',)
+    compulsory_keywords = ('happy',)
 
     def __init__(self):
         self._keywords_tracking = []
