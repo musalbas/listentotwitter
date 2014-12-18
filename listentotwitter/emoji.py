@@ -1,4 +1,4 @@
-from listentotwitter.emojidata import emojidata
+from listentotwitter.data.emojidata import emojidata
 
 def extract_emojis(text):
     emojis = []
