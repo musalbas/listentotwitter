@@ -13,6 +13,6 @@ def view_index():
 @app.route('/keyword/<keyword>')
 def view_keyword(keyword):
     if keyword_test(keyword):
-        return render_template('keyword.html', keyword=keyword, websocket_url=WEBSOCKET_URL)
+        return render_template('keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:
         abort(404)

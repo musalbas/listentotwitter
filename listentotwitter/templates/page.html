@@ -7,10 +7,27 @@
 
         <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery-1.11.1.min.js') }}"></script>
 
+        <script type="text/javascript" src="{{ url_for('static', filename='js/keyword-box.js') }}"></script>
+
         {% block head %}{% endblock %}
     </head>
 
     <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Listen{% if is_listening %}ing{% endif %} to <strong>
+                        <form id="keyword-form" action="javascript:void(0);">
+                            <input id="keyword-input" type="text" value="{{ keyword }}" autocomplete="off" autofocus>
+                            <input type="submit">
+                        </form>
+                    </strong> on Twitter</h1>
+
+                    <hr>
+                </div>
+            </div>
+        </div>
+
         {% block content %}{% endblock %}
 
         <div class="container">
