@@ -1,10 +1,11 @@
 function redirectKeyword(keyword) {
     if (keyword.indexOf('/') >= 0) {
         alert("Keywords shouldn't contain '/' mate.");
-        return;
+    } else if (keyword == '') {
+        document.location.href = '/';
+    } else {
+        document.location.href = '/keyword/' + keyword;
     }
-
-    document.location.href = '/keyword/' + keyword;
 }
 
 $(document).ready(function() {
