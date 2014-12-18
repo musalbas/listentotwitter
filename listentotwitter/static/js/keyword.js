@@ -105,7 +105,7 @@ function setInstrument(newInstrument) {
             interval = 150;
             break;
         case 'jake':
-            interval = 500;
+            interval = 800;
             break;
     }
 }

@@ -45,7 +45,7 @@ function sentimentToNote(sentiment, instrument) {
             notesNum = 87;
             break;
         case 'jake':
-            notesNum = 15;
+            notesNum = 50;
             break;
     }
 
