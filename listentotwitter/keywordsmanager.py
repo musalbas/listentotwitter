@@ -12,10 +12,14 @@ def keyword_test(keyword):
 
     keyword = keyword.strip()
 
-    if len(keyword) >= 3 and len(keyword) <= 15 and keyword not in topwords:
-        return True
-    else:
+    if len(keyword) < 3 or len(keyword) > 15:
         return False
+
+    for word in topwords:
+        if keyword in word:
+            return False
+
+    return True
 
 
 class KeywordsManager:
