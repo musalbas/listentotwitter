@@ -7,6 +7,9 @@ from listentotwitter.tweetstreamer import TweetStreamer
 
 
 def keyword_test(keyword):
+    if keyword.lower() != keyword:
+        return False
+
     keyword = keyword.strip()
 
     if len(keyword) >= 3 and len(keyword) <= 15 and keyword not in topwords:
