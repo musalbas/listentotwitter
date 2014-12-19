@@ -12,11 +12,11 @@ def view_index():
     return render_template('pages/index.html')
 
 
-@app.route('/keyword/<keyword>')
+@app.route('/<keyword>')
 def view_keyword(keyword):
     keyword_lower = keyword.lower()
     if keyword_lower != keyword:
-        return redirect('/keyword/' + keyword_lower, code=302)
+        return redirect('/' + keyword_lower, code=302)
     elif keyword_test(keyword):
         return render_template('pages/keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:

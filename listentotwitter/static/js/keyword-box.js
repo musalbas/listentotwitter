@@ -10,7 +10,7 @@ function redirectKeyword(keyword) {
     } else if (keyword == '') {
         document.location.href = '/';
     } else {
-        document.location.href = '/keyword/' + keyword;
+        document.location.href = '/' + keyword;
     }
 }
 
