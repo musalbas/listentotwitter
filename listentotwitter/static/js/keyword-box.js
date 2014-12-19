@@ -1,3 +1,5 @@
+var keywordBoxTipShowing = false;
+
 function redirectKeyword(keyword) {
     if (keyword.indexOf('/') >= 0) {
         alert("Keywords shouldn't contain '/' mate.");
@@ -6,6 +8,40 @@ function redirectKeyword(keyword) {
     } else {
         document.location.href = '/keyword/' + keyword;
     }
+}
+
+function removeKeywordBoxTip() {
+    if (!keywordBoxTipShowing) {
+        return false;
+    }
+
+    $('#keyword-form #keyword-input').data('tooltipsy').hide();
+    $('#keyword-form #keyword-input').data('tooltipsy').destroy();
+
+    keywordBoxTipShowing = false;
+
+    return true;
+}
+
+function showKeywordBoxTip(message) {
+    if (keywordBoxTipShowing) {
+        return false;
+    }
+
+    keywordBoxTipShowing = true;
+
+    $('#keyword-form #keyword-input').tooltipsy({
+        content: message,
+        showEvent: null,
+        hideEvent: null,
+        offset: [0, 1],
+        show: function(e, $el) {
+            $el.fadeIn(300);
+        },
+    });
+    $('#keyword-form #keyword-input').data('tooltipsy').show();
+
+    return true;
 }
 
 $(document).ready(function() {
@@ -20,4 +56,12 @@ $(document).ready(function() {
     });
 
     $('#keyword-form #keyword-input').trigger('focus');
+
+    if ($('#keyword-form #keyword-input').val() == '') {
+        showKeywordBoxTip("Type a word and press enter.");
+    } else {
+        $('#keyword-form #keyword-input').on('input', function() {
+            showKeywordBoxTip("Press enter to change keyword.");
+        });
+    }
 });

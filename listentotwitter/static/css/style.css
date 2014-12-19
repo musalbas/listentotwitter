@@ -57,3 +57,7 @@
 #keyword-form input[type="submit"] {
     display: none;
 }
+
+.tooltipsy {
+    font-size: 10pt;
+}
