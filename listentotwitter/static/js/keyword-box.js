@@ -1,4 +1,5 @@
 var keywordBoxTipShowing = false;
+var keywordBoxTipLastMessage = '';
 var keywordChanged = false;
 
 function redirectKeyword(keyword) {
@@ -24,20 +25,32 @@ function removeKeywordBoxTip() {
     return true;
 }
 
-function showKeywordBoxTip(message) {
+function reshowKeywordBoxTip() {
+    if (keywordBoxTipShowing) {
+        removeKeywordBoxTip();
+        showKeywordBoxTip(keywordBoxTipLastMessage, false);
+    }
+}
+
+function showKeywordBoxTip(message, fadeIn) {
+    fadeIn = typeof fadeIn !== 'undefined' ? fadeIn : true;
+
     if (keywordBoxTipShowing) {
         return false;
     }
 
     keywordBoxTipShowing = true;
+    keywordBoxTipLastMessage = message;
 
     $('#keyword-form #keyword-input').tooltipsy({
         content: message,
         showEvent: null,
         hideEvent: null,
         offset: [0, 1],
-        show: function(e, $el) {
+        show: fadeIn ? function(e, $el) {
             $el.fadeIn(300);
+        } : function(e, $el) {
+            $el.fadeIn(0);
         },
     });
     $('#keyword-form #keyword-input').data('tooltipsy').show();
@@ -57,6 +70,14 @@ $(document).ready(function() {
     });
 
     $('#keyword-form #keyword-input').trigger('focus');
+
+    $(window).resize(function() {
+        reshowKeywordBoxTip();
+    });
+
+    $(window).scroll(function() {
+        reshowKeywordBoxTip();
+    });
 
     if ($('#keyword-form #keyword-input').val() == '') {
         showKeywordBoxTip("Type a word and press enter.");
