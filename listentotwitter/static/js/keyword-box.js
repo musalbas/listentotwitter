@@ -1,4 +1,5 @@
 var keywordBoxTipShowing = false;
+var keywordChanged = false;
 
 function redirectKeyword(keyword) {
     if (keyword.indexOf('/') >= 0) {
@@ -60,8 +61,23 @@ $(document).ready(function() {
     if ($('#keyword-form #keyword-input').val() == '') {
         showKeywordBoxTip("Type a word and press enter.");
     } else {
-        $('#keyword-form #keyword-input').on('input', function() {
+        function showKeywordBoxTipMessage() {
+            keywordChanged = true;
             showKeywordBoxTip("Press enter to change keyword.");
+        }
+
+        $('#keyword-form #keyword-input').on('input', function() {
+            showKeywordBoxTipMessage();
+        });
+
+        $('#keyword-form #keyword-input').focus(function() {
+            if (keywordChanged) {
+                showKeywordBoxTipMessage();
+            }
+        });
+
+        $('#keyword-form #keyword-input').on('blur', function() {
+            removeKeywordBoxTip();
         });
     }
 });
