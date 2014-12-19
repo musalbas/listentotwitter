@@ -70,3 +70,26 @@ h1 a:hover {
     color: rgb(49, 126, 172);
     text-decoration: none;
 }
+
+.footer hr {
+    margin-bottom: 5px;
+    padding-bottom: 0;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+}
