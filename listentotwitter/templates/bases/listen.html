@@ -1,0 +1,31 @@
+{% extends "bases/global.html" %}
+
+{% block head %}
+{{ super() }}
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.tooltipsy-0.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/keyword-box.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% include "blocks/keyword-box.html" %}
+
+            <hr>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+
+<div class="container">
+    {% include "blocks/footer.html" %}
+</div>
+{% endblock %}

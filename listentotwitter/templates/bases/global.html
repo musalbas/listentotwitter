@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        {% block head %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/3rdparty/cerulean-bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery-1.11.1.min.js') }}"></script>
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block content %}{% endblock %}
+
+        {% block footer %}{% endblock %}
+
+        <a href="https://github.com/musalbas/listentotwitter" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="{{ url_for('static', filename='img/3rdparty/forkme_right_gray_6d6d6d.png') }}" alt="Fork me on GitHub"></a>
+    </body>
+
+</html>

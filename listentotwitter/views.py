@@ -9,7 +9,7 @@ from listentotwitter.keywordsmanager import keyword_test
 
 @app.route('/')
 def view_index():
-    return render_template('index.html')
+    return render_template('pages/index.html')
 
 
 @app.route('/keyword/<keyword>')
@@ -18,6 +18,6 @@ def view_keyword(keyword):
     if keyword_lower != keyword:
         return redirect('/keyword/' + keyword_lower, code=302)
     elif keyword_test(keyword):
-        return render_template('keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
+        return render_template('pages/keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:
-        return render_template('bad-keyword.html', keyword=keyword)
+        return render_template('pages/bad-keyword.html', keyword=keyword)
