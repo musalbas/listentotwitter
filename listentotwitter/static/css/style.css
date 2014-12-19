@@ -49,6 +49,7 @@
 
 #keyword-form #keyword-input {
     width: 300px;
+    color: #317eac;
 }
 
 #keyword-form #keyword-input:focus {
@@ -92,4 +93,8 @@ body {
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 60px;
+}
+
+.jumbotron {
+    background-color: #ffffff;
 }
