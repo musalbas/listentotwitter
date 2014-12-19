@@ -61,3 +61,12 @@
 .tooltipsy {
     font-size: 10pt;
 }
+
+h1 a {
+    color: rgb(49, 126, 172);
+}
+
+h1 a:hover {
+    color: rgb(49, 126, 172);
+    text-decoration: none;
+}
