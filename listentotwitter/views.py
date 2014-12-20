@@ -1,3 +1,5 @@
+import urllib
+
 from flask import redirect
 from flask import render_template
 from flask import request
@@ -22,7 +24,7 @@ def view_index():
 def view_keyword(keyword):
     keyword_clean = keyword.lower().strip()
     if keyword_clean != keyword:
-        return redirect('/' + keyword_clean, code=302)
+        return redirect('/' + urllib.quote(keyword_clean), code=302)
     elif keyword_test(keyword):
         return render_template('pages/keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:
