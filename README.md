@@ -12,6 +12,7 @@ The application has the following Python dependencies, which can be installed vi
 
 * [flask-socketio](https://pypi.python.org/pypi/Flask-SocketIO)
 * [textblob](https://pypi.python.org/pypi/textblob)
+* [tweepy](https://pypi.python.org/pypi/tweepy)
 
 Setup notes
 -
