@@ -26,3 +26,10 @@ If you'd like to setup your own copy of the application, following these instruc
 5. Edit the `HTTP_*` variables in `listentotwitter/config.py` with the host and port that the web server should bind to.
 6. Run `python runserver.py`.
 7. The web server should now be running and accessible from your web browser.
+
+Credits
+-
+
+Initially created by [Mustafa Al-Bassam](https://musalbas.com), [Mark Ormesher](http://markormesher.co.uk/), [Fares Alaboud](http://faresalaboud.me/) and [Kristin Kasavetova](http://krisi.me/) as [Noisy Tweets](https://github.com/markormesher/NoisyTweets) at [MLH](https://mlh.io/) Launch Hack.
+
+[![](http://listentotwitter.com/static/img/3rdparty/c_mini_5.gif)](http://kopimi.co/) [![](http://listentotwitter.com/static/img/3rdparty/datalove-s3.png)](http://datalove.me)
