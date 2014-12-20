@@ -13,6 +13,19 @@ def _extract_tweet_emojis_codepoints(tweet):
     return codepoints
 
 
+def _in_tweet(tweet, keyword):
+    strings = [keyword]
+
+    if keyword[0] != '#':
+        strings.append('#' + keyword)
+
+    for s in strings:
+        if tweet.startswith(s + ' ') or ' ' + s + ' ' in tweet or tweet.endswith(' ' + s):
+            return True
+
+    return False
+
+
 class TweetAnalyser:
 
     def __init__(self, socketio):
@@ -22,7 +35,7 @@ class TweetAnalyser:
 
     def incoming_tweet(self, tweet):
         for keyword in self._keywords_tracking:
-            if keyword in tweet:
+            if _in_tweet(tweet, keyword):
                 sentiment = int(TextBlob(tweet).sentiment.polarity * 100)
                 emoji_codepoints = _extract_tweet_emojis_codepoints(tweet)
 
