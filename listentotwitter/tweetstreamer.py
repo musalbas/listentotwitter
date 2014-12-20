@@ -93,7 +93,7 @@ class StreamThread(threading.Thread):
 
 class TweetStreamer():
 
-    reconnect_interval = 10
+    reconnect_interval = 6
 
     def __init__(self, tweet_callback):
         self._tweet_callback = tweet_callback
