@@ -35,7 +35,7 @@ class TweetAnalyser:
 
     def incoming_tweet(self, tweet):
         for keyword in self._keywords_tracking:
-            if _in_tweet(tweet, keyword):
+            if _in_tweet(tweet.lower(), keyword.lower()):
                 sentiment = int(TextBlob(tweet).sentiment.polarity * 100)
                 emoji_codepoints = _extract_tweet_emojis_codepoints(tweet)
 
