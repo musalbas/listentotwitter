@@ -3,7 +3,8 @@ var keywordBoxTipLastMessage = '';
 var keywordChanged = false;
 
 function redirectKeyword(keyword) {
-    document.location.href = '/' + encodeURIComponent(keyword);
+    keyword = encodeURIComponent('a' + keyword).substring(1);
+    document.location.href = '/' + keyword;
 }
 
 function removeKeywordBoxTip() {
