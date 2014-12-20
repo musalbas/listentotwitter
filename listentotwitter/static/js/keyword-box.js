@@ -3,15 +3,7 @@ var keywordBoxTipLastMessage = '';
 var keywordChanged = false;
 
 function redirectKeyword(keyword) {
-    if (keyword.indexOf('/') >= 0) {
-        alert("Keywords shouldn't contain '/' mate.");
-    } else if (keyword.indexOf('\\') >= 0) {
-        alert("Keywords shouldn't contain '\\' mate.");
-    } else if (keyword == '') {
-        document.location.href = '/';
-    } else {
-        document.location.href = '/' + keyword;
-    }
+    document.location.href = '/' + encodeURIComponent(keyword);
 }
 
 function removeKeywordBoxTip() {
