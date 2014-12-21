@@ -109,7 +109,10 @@ function setInstrument(newInstrument) {
             break;
     }
 
-    $.cookie('instrument', newInstrument);
+    if (!(!$.cookie('instrument') and newInstrument == 'piano')) {
+        $.cookie('instrument', newInstrument);
+    }
+
     $('#instrument-select').val(newInstrument);
 }
 
