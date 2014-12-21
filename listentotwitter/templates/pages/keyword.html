@@ -8,6 +8,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/socket.io-0.9.16.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/soundmanager-2-nodebug.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.flot-0.8.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.cookie-1.4.1.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/noisyclient.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/keyword.js') }}"></script>
@@ -15,7 +16,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    setInstrument('piano');
     startNoisyClient("{{ keyword }}", '{{ websocket_url }}');
 });
 </script>
@@ -39,6 +39,14 @@ $(document).ready(function() {
                     <tbody>
                     </tbody>
                 </table>
+            </div>
+
+            <h2>Instrument</h2>
+            <div>
+                <select id="instrument-select">
+                    <option value="piano">Piano</option>
+                    <option value="jake">Jake</option>
+                </select>
             </div>
         </div>
 

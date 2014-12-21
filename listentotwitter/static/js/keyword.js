@@ -108,6 +108,9 @@ function setInstrument(newInstrument) {
             interval = 800;
             break;
     }
+
+    $.cookie('instrument', newInstrument);
+    $('#instrument-select').val(newInstrument);
 }
 
 function startNoisyClient(keyword, websocketUrl) {
@@ -139,3 +142,15 @@ function updateGraph(point) {
     graphPlot.setData([pointsToSeries(graphPoints)]);
     graphPlot.draw();
 }
+
+$(document).ready(function() {
+    if (!$.cookie('instrument')) {
+        setInstrument('piano');
+    } else {
+        setInstrument($.cookie('instrument'));
+    }
+
+    $('#instrument-select').change(function() {
+        setInstrument($('#instrument-select').val());
+    });
+});
