@@ -10,7 +10,7 @@ Python dependencies
 
 The application has the following Python dependencies, which can be installed via pip:
 
-* [flask-socketio==0.4.0](https://pypi.python.org/pypi/Flask-SocketIO/0.4.0)
+* [flask-socketio==0.4.0](https://pypi.python.org/pypi/Flask-SocketIO/0.4.0) (later versions break the application)
 * [textblob](https://pypi.python.org/pypi/textblob)
 * [tweepy](https://pypi.python.org/pypi/tweepy)
 
