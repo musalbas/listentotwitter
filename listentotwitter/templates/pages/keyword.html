@@ -28,6 +28,9 @@ $(document).ready(function() {
     <div class="row">
         <div class="col-sm-4">
             <h2>Live tweets</h2>
+            <div id="spinner">
+                <img src="{{ url_for('static', filename='img/3rdparty/spiffygif_30x30.gif') }}">
+            </div>
             <div id="live-tweets">
                 <table id="tweets-table" class="table">
                     <thead>

@@ -2,9 +2,14 @@ NoisyClient = {
     keyword: null,
     socket: null,
     onTweetFunctions: [],
+    onKeywordsSyncedFunctions: [],
 
     addOnTweetFunction: function(f) {
         this.onTweetFunctions[this.onTweetFunctions.length] = f;
+    },
+
+    addOnKeywordsSyncedFunction: function(f) {
+        this.onKeywordsSyncedFunctions[this.onKeywordsSyncedFunctions.length] = f;
     },
 
     ping: function() {
@@ -14,6 +19,12 @@ NoisyClient = {
     runOnTweetFunctions: function(tweet) {
         for (var i = 0; i < this.onTweetFunctions.length; i++) {
             this.onTweetFunctions[i](tweet);
+        }
+    },
+
+    runOnKeywordsSyncedFunctions: function(result) {
+        for (var i = 0; i < this.onKeywordsSyncedFunctions.length; i++) {
+            this.onKeywordsSyncedFunctions[i](result);
         }
     },
 
@@ -33,6 +44,10 @@ NoisyClient = {
 
         this.socket.on('tweet', function(tweet) {
             NoisyClient.runOnTweetFunctions(tweet);
+        });
+
+        this.socket.on('keywords_synced', function(result) {
+            NoisyClient.runOnKeywordsSyncedFunctions(result);
         });
     },
 };

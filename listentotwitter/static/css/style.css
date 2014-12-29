@@ -41,6 +41,11 @@
 #live-tweets {
     height: 550px;
     overflow: hidden;
+    display: none;
+}
+
+#spinner {
+    height: 550px;
 }
 
 #keyword-form {

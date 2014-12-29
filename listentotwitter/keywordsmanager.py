@@ -27,7 +27,7 @@ class KeywordsManager:
         self._keywords_info = {}
 
         self._tweetanalyser = TweetAnalyser(socketio)
-        self._tweetstreamer = TweetStreamer(self._tweetanalyser.incoming_tweet)
+        self._tweetstreamer = TweetStreamer(self._tweetanalyser.incoming_tweet, self._on_new_keywords)
 
         for keyword in self.compulsory_keywords:
             self.ping_keyword(keyword)
@@ -50,10 +50,14 @@ class KeywordsManager:
             self._keywords_tracking.remove(keyword)
             del self._keywords_info[keyword]
 
+    def _on_new_keywords(self, new_keywords):
+        for k in new_keywords:
+            socketio.emit('keywords_synced', {'synced': True}, room=k)
+
     def ping_keyword(self, keyword):
         if keyword in self._keywords_tracking:
             self._keywords_info[keyword]['last_ping'] = time.time()
-            return
+            return True
 
         self._purge_dead_keywords()
 

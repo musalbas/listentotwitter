@@ -95,8 +95,9 @@ class TweetStreamer():
 
     reconnect_interval = 10
 
-    def __init__(self, tweet_callback):
+    def __init__(self, tweet_callback, new_keywords_callback):
         self._tweet_callback = tweet_callback
+        self._new_keywords_callback = new_keywords_callback
 
         self._auth = OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
         self._auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
@@ -104,6 +105,7 @@ class TweetStreamer():
         self._streamthread = None
         self._new_streamthead = None
         self._keywords_tracking = None
+        self._current_keywords_tracking = []
         self._update_keywords_tracking_locked = False
         self._last_connect = 0
 
@@ -115,6 +117,14 @@ class TweetStreamer():
             del self._new_streamthread
             self._new_streamthread = None
             self._update_keywords_tracking_locked = False
+
+            new_keywords = []
+            for k in self._streamthread.get_keywords_tracking():
+                if k not in self._current_keywords_tracking:
+                    new_keywords.append(k)
+            self._new_keywords_callback(new_keywords)
+
+            self._current_keywords_tracking = self._streamthread.get_keywords_tracking()
 
             if self._streamthread.get_keywords_tracking() != self._keywords_tracking:
                 self._streamthread._update_keywords_tracking(self._keywords_tracking)

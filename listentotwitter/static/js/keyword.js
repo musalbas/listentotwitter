@@ -10,6 +10,8 @@ var maxEmojis = 12;
 var instrument = '';
 var interval = 0;
 
+var loading = true;
+
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);
 }
@@ -69,6 +71,10 @@ function processSentimentQueue() {
 }
 
 function processTweet(tweet) {
+    if (loading) {
+        setLoading(false);
+    }
+
     sentimentQueue.push(tweet['sentiment']);
 
     $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
@@ -116,11 +122,27 @@ function setInstrument(newInstrument) {
     $('#instrument-select').val(newInstrument);
 }
 
+function setLoading(newLoading) {
+    if (!newLoading && loading) {
+        loading = false;
+        $('#spinner').hide();
+        $('#live-tweets').show();
+    } else if (newLoading && !loading) {
+        loading = true;
+        $('spinner').show();
+        $('#live-tweets').hide();
+    }
+}
+
 function startNoisyClient(keyword, websocketUrl) {
     NoisyClient.setup(keyword, websocketUrl);
     
     NoisyClient.addOnTweetFunction(function(tweet) {
         processTweet(tweet);
+    });
+
+    NoisyClient.addOnKeywordsSyncedFunction(function(result) {
+        setLoading(!result['synced']);
     });
 
     graphPlot = $.plot('#mood-graph', [pointsToSeries(graphPoints)], {

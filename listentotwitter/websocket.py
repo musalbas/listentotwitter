@@ -1,3 +1,4 @@
+from flask.ext.socketio import emit
 from flask.ext.socketio import join_room
 
 from listentotwitter import keywordsmanager
@@ -9,5 +10,8 @@ from listentotwitter.keywordsmanager import keyword_test
 def handle_ping(data):
     if not keyword_test(data['keyword']):
         return
-    keywordsmanager.ping_keyword(data['keyword'])
     join_room(data['keyword'])
+    result = keywordsmanager.ping_keyword(data['keyword'])
+
+    if result:
+        emit('keywords_synced', {'synced': True})
