@@ -40,7 +40,7 @@ NoisyClient = {
         this.ping();
         window.setInterval(function() {
             NoisyClient.ping();
-        }, 10000);
+        }, 3000);
 
         this.socket.on('tweet', function(tweet) {
             NoisyClient.runOnTweetFunctions(tweet);
