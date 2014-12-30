@@ -24,10 +24,15 @@ class StreamHandler(StreamListener):
 
     def on_connect(self):
         log("Twitter stream connected")
+        if self._stop_signal:
+            return False
+
         if self._first_response:
             self._first_response = False
             if self._first_response_callback is not None:
                 self._first_response_callback(True)
+
+        return not self._stop_signal
 
     def on_data(self, data):
         if self._stop_signal:
@@ -39,8 +44,13 @@ class StreamHandler(StreamListener):
             tweet = datadict['text']
             self._tweet_callback(tweet)
 
+        return not self._stop_signal
+
     def on_error(self, status):
         log("Received Twitter API error: " + str(status))
+        if self._stop_signal:
+            return False
+
         if self._first_response:
             self._first_response = False
             if self._first_response_callback is not None:
@@ -80,7 +90,7 @@ class StreamThread(threading.Thread):
                 self._stream.filter(track=self._keywords_tracking)
             except Exception as e:
                 log("Connection to Twitter stream lost: " + str(e))
-                if self._streamhandler._first_response:
+                if self._streamhandler._first_response and not self._stop_signal:
                     self._streamhandler._first_response = False
                     if self._first_response_callback is not None:
                         self._first_response_callback(False)
@@ -94,6 +104,7 @@ class StreamThread(threading.Thread):
 class TweetStreamer():
 
     reconnect_interval = 10
+    max_update_keywords_tracking_lock_time = 1
 
     def __init__(self, tweet_callback, new_keywords_callback):
         self._tweet_callback = tweet_callback
@@ -107,6 +118,7 @@ class TweetStreamer():
         self._keywords_tracking = None
         self._current_keywords_tracking = []
         self._update_keywords_tracking_locked = False
+        self._last_update_keywords_tracking_locked = 0
         self._last_connect = 0
 
     def _on_stream_first_response(self, response):
@@ -140,9 +152,17 @@ class TweetStreamer():
 
         log("Update keywords tracking locked: " + str(self._update_keywords_tracking_locked))
         if self._update_keywords_tracking_locked:
-            return
+            if time.time() - self._last_update_keywords_tracking_locked > self.max_update_keywords_tracking_lock_time:
+                log("Killing update keywords tracking lock, took too long")
+                self._update_keywords_tracking_locked = False
+                if self._new_streamthread is not None:
+                    self._new_streamthread.stop()
+                    self._new_streamthread = None
+            else:
+                return
 
         self._update_keywords_tracking_locked = True
+        self._last_update_keywords_tracking_locked = time.time()
 
         connect_diff = time.time() - self._last_connect
         if self.reconnect_interval > connect_diff:
