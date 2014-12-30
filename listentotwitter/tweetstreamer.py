@@ -104,7 +104,7 @@ class StreamThread(threading.Thread):
 class TweetStreamer():
 
     reconnect_interval = 10
-    max_update_keywords_tracking_lock_time = 1
+    max_update_keywords_tracking_lock_time = 20
 
     def __init__(self, tweet_callback, new_keywords_callback):
         self._tweet_callback = tweet_callback
