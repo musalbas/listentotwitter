@@ -123,14 +123,13 @@ function setInstrument(newInstrument) {
 }
 
 function setLoading(newLoading) {
+    // caveat: setLoading(true) should not be used when tweets have already been received
     if (!newLoading && loading) {
         loading = false;
         $('#spinner').hide();
-        $('#live-tweets').show();
     } else if (newLoading && !loading) {
         loading = true;
         $('spinner').show();
-        $('#live-tweets').hide();
     }
 }
 
