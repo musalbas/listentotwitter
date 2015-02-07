@@ -84,7 +84,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 95px;
+    margin-bottom: 80px;
 }
 
 .footer {
@@ -92,7 +92,7 @@ body {
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 95px;
+    height: 80px;
 }
 
 .listen-keyword-box-container {
