@@ -12,6 +12,8 @@ var interval = 0;
 
 var loading = true;
 
+var k = '';
+
 for (var i = 0; i < graphTotalPoints; i++) {
     graphPoints.push(0);
 }
@@ -75,6 +77,12 @@ function processTweet(tweet) {
         setLoading(false);
     }
 
+    if (k == 'hacklondon') {
+        $('<tr class=""><td>' + tweet['tweet'] + '</td></tr>').prependTo('#tweets-table tbody');
+        $('#tweets-table').find('tbody').find('tr').slice(20, 21).remove();
+        return;
+    }
+
     sentimentQueue.push(tweet['sentiment']);
 
     $('<tr class="' + sentimentToCssClass(tweet['sentiment']) + '"><td>' + tweet['tweet'] + '</td><td>' + tweet['sentiment'] + '</td></tr>').prependTo('#tweets-table tbody');
@@ -134,6 +142,8 @@ function setLoading(newLoading) {
 }
 
 function startNoisyClient(keyword, websocketUrl) {
+    k = keyword;
+
     NoisyClient.setup(keyword, websocketUrl);
     
     NoisyClient.addOnTweetFunction(function(tweet) {

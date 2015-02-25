@@ -1,0 +1,46 @@
+{% extends "bases/listen.html" %}
+
+{% block head %}
+{{ super() }}
+
+<title>Listen to {{ keyword }} on Twitter</title>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/socket.io-0.9.16.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/soundmanager-2-nodebug.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.flot-0.8.3.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/3rdparty/jquery.cookie-1.4.1.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/noisyclient.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/keyword.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/notes.js') }}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    startNoisyClient("{{ keyword }}", '{{ websocket_url }}');
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Live tweets</h2>
+            <div id="live-tweets">
+                <table id="tweets-table" class="table">
+                    <tbody>
+                        <tr id="spinner">
+                            <td>
+                                <img src="{{ url_for('static', filename='img/3rdparty/spiffygif_30x30.gif') }}">
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

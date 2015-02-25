@@ -42,6 +42,8 @@ class StreamHandler(StreamListener):
 
         if 'in_reply_to_status_id' in datadict:
             tweet = datadict['text']
+            if 'hacklondon' in tweet.lower():
+                tweet = "<b>@" + datadict['user']['screen_name'] + "</b>: " + tweet
             self._tweet_callback(tweet)
 
         return not self._stop_signal

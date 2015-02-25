@@ -25,6 +25,8 @@ def view_keyword(keyword):
     keyword_clean = keyword.lower().strip()
     if keyword_clean != keyword:
         return redirect('/' + urllib.quote(keyword_clean), code=302)
+    elif keyword == 'hacklondon':
+        return render_template('pages/hacklondon.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     elif keyword_test(keyword):
         return render_template('pages/keyword.html', is_listening=True, keyword=keyword, websocket_url=WEBSOCKET_URL)
     else:

@@ -14,6 +14,10 @@ def _extract_tweet_emojis_codepoints(tweet):
 
 
 def _in_tweet(tweet, keyword):
+    if keyword == 'hacklondon':
+        if keyword in tweet:
+            return True
+
     strings = [keyword]
 
     if keyword[0] != '#':
